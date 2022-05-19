@@ -4,10 +4,52 @@
 // @version     1.0
 // @author      Toby
 // @description Bread (Bionic Reading) - Read text faster & easier
+// @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
+// @grant       GM_getValue
+// @grant       GM_setValue
+// @grant       GM_registerMenuCommand
 // ==/UserScript==
 
-minWordLength = 4;
-minTextLength = 50;
+GM_config.init(
+    {
+        'id': 'BreadConfig',
+        'title': 'Bread Configuration',
+        'fields':
+        {
+            'MinWordLength':
+            {
+                'label': 'Minimum word length',
+                'type': 'int',
+                'min': 1,
+                'max': 20,
+                'default': 4,
+            },
+            'MinTextLength':
+            {
+                'label': 'Minimum text length',
+                'type': 'int',
+                'min': 1,
+                'max': 500,
+                'default': 50,
+            },
+            'BoldRatio':
+            {
+                'label': 'Bold ratio',
+                'type': 'float',
+                'min': 0.1,
+                'max': 1,
+                'default': 0.4,
+            },
+        }
+    });
+
+GM_registerMenuCommand('Configuration', () => {
+    GM_config.open()
+});
+
+minWordLength = GM_config.get('MinWordLength');
+minTextLength = GM_config.get('MinTextLength');
+boldRatio = GM_config.get('BoldRatio');
 
 function insertTextBefore(text, node, bold) {
     if (bold) {
@@ -46,7 +88,7 @@ function processNode(node) {
                 // State flipped or end of string
                 if (eng && wLen >= minWordLength) {
                     var word = text.substring(wStart, wStart + wLen);
-                    var numBold = Math.ceil(word.length * 0.3);
+                    var numBold = Math.ceil(word.length * boldRatio);
                     var bt = word.substring(0, numBold), nt = word.substring(numBold);
                     insertTextBefore(bt, node, true);
                     insertTextBefore(nt, node, false);
