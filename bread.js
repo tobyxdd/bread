@@ -25,10 +25,11 @@ function insertTextBefore(text, node, bold) {
 function processNode(node) {
     var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
         acceptNode: (node) => {
-            return (node.nodeValue.trim().length >= minTextLength &&
+            return (
                 node.parentNode.nodeName !== 'SCRIPT' &&
                 node.parentNode.nodeName !== 'NOSCRIPT' &&
-                node.parentNode.nodeName !== 'STYLE') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                node.parentNode.nodeName !== 'STYLE' &&
+                node.nodeValue.length >= minTextLength) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
     });
 
