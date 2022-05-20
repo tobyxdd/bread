@@ -2,11 +2,11 @@
 
 ![Demo](demo.png)
 
-Configurable Options:
+Configurable options:
 
-- Mininum word length
-- Minimum text (paragraph) length
-- Bold ratio (percentage)
+- Minimum word length - the minimum length of a word to be "bionified"
+- Minimum text length - the minimum length of a paragraph to be "bionified"
+- Bold ratio - the percentage of letters in each word that will be bolded
 
 Tested on [Tampermonkey](https://www.tampermonkey.net/) and [Violentmonkey](https://violentmonkey.github.io/).
 
