@@ -82,7 +82,7 @@ function processNode(node) {
 
         // English letters only
         for (var i = 0; i <= text.length; i++) { // We use <= here because we want to include the last character in the loop
-            var cEng = i < text.length ? /[a-zA-Z]/.test(text[i]) : false;
+            var cEng = i < text.length ? /[\p{Letter}\p{Mark}]/u.test(text[i]) : false;
 
             if (i == text.length || eng !== cEng) {
                 // State flipped or end of string
