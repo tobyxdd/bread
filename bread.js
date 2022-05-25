@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Bread
-// @match       <all_urls>
-// @version     1.0.1
+// @match       *://*/*
+// @version     1.0.2
 // @author      Toby
 // @description Bread (Bionic Reading) - Read text faster & easier
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
