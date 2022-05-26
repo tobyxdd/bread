@@ -78,7 +78,7 @@ function processNode(node) {
     var node;
     while (node = walker.nextNode()) {
         var text = node.nodeValue;
-        var wStart = -1, wLen = 0, eng = false;
+        var wStart = -1, wLen = 0, eng = null;
 
         // English letters only
         for (var i = 0; i <= text.length; i++) { // We use <= here because we want to include the last character in the loop
