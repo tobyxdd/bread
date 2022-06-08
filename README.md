@@ -8,6 +8,8 @@ Configurable options:
 - Minimum text length - the minimum length of a paragraph to be "bionified"
 - Bold ratio - the percentage of letters in each word that will be bolded
 
+Use the "Configuration" menu option (or Ctrl+B if your script manager doesn't support menu) to open the configuration dialog.
+
 Tested on [Tampermonkey](https://www.tampermonkey.net/) and [Violentmonkey](https://violentmonkey.github.io/).
 
 [**Get it on OpenUserJS**](https://openuserjs.org/scripts/tobyxdd/Bread)
