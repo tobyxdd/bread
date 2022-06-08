@@ -1,12 +1,11 @@
 // ==UserScript==
 // @name        Bread
 // @match       *://*/*
-// @version     1.0.3
+// @version     1.0.4
 // @author      Toby
+// @license     MIT
 // @description Bread (Bionic Reading) - Read text faster & easier
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
-// @grant       GM_getValue
-// @grant       GM_setValue
 // @grant       GM_registerMenuCommand
 // ==/UserScript==
 
@@ -43,8 +42,15 @@ GM_config.init(
         }
     });
 
-GM_registerMenuCommand('Configuration', () => {
-    GM_config.open()
+if (typeof GM_registerMenuCommand !== "undefined") {
+    GM_registerMenuCommand('Configuration', () => {
+        GM_config.open()
+    });
+}
+document.addEventListener('keydown', function (event) {
+    if (event.ctrlKey && event.key === 'b') {
+        GM_config.open()
+    }
 });
 
 minWordLength = GM_config.get('MinWordLength');
