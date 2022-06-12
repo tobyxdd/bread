@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name        Bread
 // @match       *://*/*
-// @version     1.0.4
+// @version     1.0.5
 // @author      Toby
 // @license     MIT
 // @description Bread (Bionic Reading) - Read text faster & easier
 // @require     https://openuserjs.org/src/libs/sizzle/GM_config.js
 // @grant       GM_registerMenuCommand
 // ==/UserScript==
+
+/* jshint esversion: 6 */
 
 GM_config.init(
     {
@@ -39,23 +41,30 @@ GM_config.init(
                 'max': 1,
                 'default': 0.4,
             },
+            'ProcessDyn':
+            {
+                'label': 'Process dynamically loaded content (may cause performance issues)',
+                'type': 'checkbox',
+                'default': true,
+            },
         }
     });
 
 if (typeof GM_registerMenuCommand !== "undefined") {
-    GM_registerMenuCommand('Configuration', () => {
-        GM_config.open()
+    GM_registerMenuCommand('Configuration', function () {
+        GM_config.open();
     });
 }
 document.addEventListener('keydown', function (event) {
     if (event.ctrlKey && event.key === 'b') {
-        GM_config.open()
+        GM_config.open();
     }
 });
 
-minWordLength = GM_config.get('MinWordLength');
-minTextLength = GM_config.get('MinTextLength');
-boldRatio = GM_config.get('BoldRatio');
+var minWordLength = GM_config.get('MinWordLength');
+var minTextLength = GM_config.get('MinTextLength');
+var boldRatio = GM_config.get('BoldRatio');
+var processDyn = GM_config.get('ProcessDyn');
 
 function insertTextBefore(text, node, bold) {
     if (bold) {
@@ -72,7 +81,7 @@ function insertTextBefore(text, node, bold) {
 
 function processNode(node) {
     var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, {
-        acceptNode: (node) => {
+        acceptNode: function (node) {
             return (
                 node.parentNode.nodeName !== 'SCRIPT' &&
                 node.parentNode.nodeName !== 'NOSCRIPT' &&
@@ -86,7 +95,6 @@ function processNode(node) {
         var text = node.nodeValue;
         var wStart = -1, wLen = 0, eng = null;
 
-        // English letters only
         for (var i = 0; i <= text.length; i++) { // We use <= here because we want to include the last character in the loop
             var cEng = i < text.length ? /[\p{Letter}\p{Mark}]/u.test(text[i]) : false;
 
@@ -114,6 +122,12 @@ function processNode(node) {
     }
 }
 
-window.addEventListener("load", function () {
-    processNode(document.body);
-});
+window.addEventListener("load", function (event) {
+    processNode(event.target);
+}, false);
+
+if (processDyn) {
+    document.body.addEventListener('DOMNodeInserted', function (event) {
+        processNode(event.target);
+    }, false);
+}

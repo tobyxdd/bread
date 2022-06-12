@@ -7,6 +7,7 @@ Configurable options:
 - Minimum word length - the minimum length of a word to be "bionified"
 - Minimum text length - the minimum length of a paragraph to be "bionified"
 - Bold ratio - the percentage of letters in each word that will be bolded
+- Process dynamically loaded content - whether to process dynamically loaded content (may cause performance issues)
 
 Use the "Configuration" menu option (or Ctrl+B if your script manager doesn't support menu) to open the configuration dialog.
 
