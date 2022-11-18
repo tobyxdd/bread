@@ -86,6 +86,7 @@ function processNode(node) {
                 node.parentNode.nodeName !== 'SCRIPT' &&
                 node.parentNode.nodeName !== 'NOSCRIPT' &&
                 node.parentNode.nodeName !== 'STYLE' &&
+                node.parentNode.nodeName !== 'TITLE' &&
                 node.nodeValue.length >= minTextLength) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         }
     });
