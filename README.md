@@ -1,5 +1,9 @@
 # Bread - an open-source Bionic Reading userscript implementation
 
+
+> **Note**
+> I'm no longer actively maintaining this project. Luckily, [ltguillaume](https://github.com/ltguillaume) has made a fork with various improvements. **https://github.com/ltguillaume/bread**
+
 ![Demo](demo.png)
 
 Configurable options:
